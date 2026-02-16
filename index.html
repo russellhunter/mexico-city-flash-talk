@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>The Retirement of Myogiryu - 断髪式</title>
+    <!-- Preload critical images -->
+    <link rel="preload" href="assets/images/IMG_6617.jpg" as="image">
+    <link rel="preload" href="assets/images/IMG_6734.jpg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Traditional Japanese colors */
+            --sumi: #1a1a1a;           /* Ink black */
+            --ai: #1e3a5f;             /* Indigo blue */
+            --kon: #0d1b2a;            /* Deep navy/indigo */
+            --kinari: #f5f0e6;         /* Undyed silk cream */
+            --shu: #c53d43;            /* Vermillion red */
+            --kincha: #c18a56;         /* Golden brown */
+            --shironeri: #fcfaf2;      /* Silk white */
+            --nezumi: #7d7d7d;         /* Gray */
+            --kitsune: #d4a574;        /* Fox/gold */
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+            background: var(--kon);
+            color: var(--kinari);
+        }
+
+        /* Paper texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .presentation {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+            padding: 80px;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Slower, ceremonial animations */
+        .slide.active .animate-in {
+            animation: brushStroke 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .slide.active .animate-in-delay {
+            animation: brushStroke 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+            opacity: 0;
+        }
+
+        .slide.active .animate-in-delay-2 {
+            animation: brushStroke 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
+            opacity: 0;
+        }
+
+        .slide.active .fade-slow {
+            animation: fadeSlow 2s ease forwards;
+        }
+
+        @keyframes brushStroke {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+                filter: blur(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fadeSlow {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Shimmer effect for gold text */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Glow pulse for highlights */
+        @keyframes glowPulse {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(212, 165, 116, 0.3),
+                             0 0 40px rgba(212, 165, 116, 0.1);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(212, 165, 116, 0.5),
+                             0 0 60px rgba(212, 165, 116, 0.2);
+            }
+        }
+
+        /* Line drawing animation */
+        @keyframes drawLine {
+            from { width: 0; }
+            to { width: 80px; }
+        }
+
+        @keyframes drawLineVertical {
+            from { height: 0; }
+            to { height: 60px; }
+        }
+
+        /* Ink splash reveal */
+        @keyframes inkReveal {
+            0% {
+                clip-path: circle(0% at 50% 50%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                clip-path: circle(150% at 50% 50%);
+                opacity: 1;
+            }
+        }
+
+        /* Breathing animation for ceremonial moments */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.05); opacity: 0.6; }
+        }
+
+        /* Slide layouts */
+        .slide-content {
+            max-width: 1100px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .slide-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .slide-fullimage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+        }
+
+        .slide-fullimage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-fullimage .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 80px;
+            background: linear-gradient(transparent, rgba(13, 27, 42, 0.97));
+        }
+
+        .slide-fullimage .overlay-center {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(13, 27, 42, 0.75);
+            padding: 80px;
+        }
+
+        .slide-fullimage .overlay-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 80px;
+            background: linear-gradient(rgba(13, 27, 42, 0.95), transparent);
+        }
+
+        /* Typography - Japanese-inspired */
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            letter-spacing: 0.02em;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+
+        .japanese {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 400;
+        }
+
+        .japanese-large {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--kitsune);
+        }
+
+        .quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-weight: 300;
+            line-height: 1.5;
+            font-style: italic;
+            letter-spacing: 0.01em;
+        }
+
+        .subtitle {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            color: var(--nezumi);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .statement {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.4;
+            letter-spacing: 0.02em;
+        }
+
+        .statement-small {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 300;
+            line-height: 1.8;
+            letter-spacing: 0.01em;
+        }
+
+        .highlight {
+            color: var(--shu);
+            text-shadow: 0 0 30px rgba(197, 61, 67, 0.4);
+        }
+
+        .gold {
+            color: var(--kitsune);
+            background: linear-gradient(90deg, var(--kitsune) 0%, #f0d9b5 50%, var(--kitsune) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+
+        /* Static gold for smaller text */
+        .gold-static {
+            color: var(--kitsune);
+        }
+
+        /* Glowing gold for key moments */
+        .gold-glow {
+            color: var(--kitsune);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        /* Enso circle - zen motif */
+        .enso {
+            width: 200px;
+            height: 200px;
+            border: 2px solid var(--kitsune);
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            opacity: 0.4;
+            position: relative;
+            animation: breathe 6s ease-in-out infinite;
+        }
+
+        .enso::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            border: 1px solid var(--kitsune);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .enso::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            border: 1px solid var(--kitsune);
+            border-radius: 50%;
+            opacity: 0.15;
+        }
+
+        /* Brush stroke decorations */
+        .brush-stroke {
+            position: absolute;
+            width: 300px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--kitsune) 20%, var(--kitsune) 80%, transparent);
+            opacity: 0.15;
+            transform: rotate(-5deg);
+        }
+
+        .brush-stroke-vertical {
+            position: absolute;
+            width: 3px;
+            height: 200px;
+            background: linear-gradient(180deg, transparent, var(--shu) 20%, var(--shu) 80%, transparent);
+            opacity: 0.1;
+        }
+
+        /* Seigaiha wave pattern background */
+        .seigaiha-bg {
+            background-image:
+                radial-gradient(circle at 100% 150%, var(--kon) 24%, var(--ai) 24%, var(--ai) 28%, transparent 28%, transparent),
+                radial-gradient(circle at 0% 150%, var(--kon) 24%, var(--ai) 24%, var(--ai) 28%, transparent 28%, transparent),
+                radial-gradient(circle at 50% 100%, var(--ai) 10%, var(--kon) 10%, var(--kon) 23%, var(--ai) 23%, var(--ai) 28%, transparent 28%, transparent);
+            background-size: 60px 30px;
+            background-position: 0 0;
+            opacity: 0.03;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Corner accents */
+        .corner-accent {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .corner-accent::before,
+        .corner-accent::after {
+            content: '';
+            position: absolute;
+            background: var(--kitsune);
+        }
+
+        .corner-accent.top-left {
+            top: 40px;
+            left: 40px;
+        }
+        .corner-accent.top-left::before {
+            width: 60px;
+            height: 1px;
+            top: 0;
+            left: 0;
+        }
+        .corner-accent.top-left::after {
+            width: 1px;
+            height: 60px;
+            top: 0;
+            left: 0;
+        }
+
+        .corner-accent.bottom-right {
+            bottom: 40px;
+            right: 40px;
+        }
+        .corner-accent.bottom-right::before {
+            width: 60px;
+            height: 1px;
+            bottom: 0;
+            right: 0;
+        }
+        .corner-accent.bottom-right::after {
+            width: 1px;
+            height: 60px;
+            bottom: 0;
+            right: 0;
+        }
+
+        /* Vertical Japanese text */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            font-family: 'Noto Serif JP', serif;
+            letter-spacing: 0.5em;
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--kitsune);
+            opacity: 0.6;
+        }
+
+        /* Image styles */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: sepia(10%) contrast(1.05);
+        }
+
+        /* Divider - brush stroke style */
+        .divider {
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--kitsune), transparent);
+            margin: 40px auto;
+            opacity: 0.6;
+            position: relative;
+        }
+
+        .slide.active .divider {
+            animation: drawLine 1s ease-out 0.3s forwards;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--kitsune);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+
+        .divider::before { left: -3px; }
+        .divider::after { right: -3px; }
+
+        .divider-vertical {
+            width: 2px;
+            height: 0;
+            background: linear-gradient(180deg, transparent, var(--kitsune), transparent);
+            margin: 30px auto;
+            opacity: 0.6;
+        }
+
+        .slide.active .divider-vertical {
+            animation: drawLineVertical 1s ease-out 0.5s forwards;
+        }
+
+        /* Animated divider variant */
+        .divider-glow {
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--kitsune), transparent);
+            margin: 40px auto;
+            position: relative;
+            overflow: visible;
+        }
+
+        .divider-glow::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            width: 30px;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, var(--kitsune), transparent);
+            filter: blur(3px);
+            animation: slideGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes slideGlow {
+            0%, 100% { left: 0; }
+            50% { left: calc(100% - 30px); }
+        }
+
+        /* Timeline - ceremonial style */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            text-align: left;
+            padding-left: 30px;
+            border-left: 1px solid rgba(212, 165, 116, 0.3);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            opacity: 0;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            width: 8px;
+            height: 8px;
+            background: var(--kitsune);
+            border-radius: 50%;
+        }
+
+        .slide.active .timeline-item {
+            animation: brushStroke 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .slide.active .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .slide.active .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .slide.active .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .slide.active .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+        .slide.active .timeline-item:nth-child(5) { animation-delay: 1.0s; }
+        .slide.active .timeline-item:nth-child(6) { animation-delay: 1.2s; }
+
+        .timeline-text {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        /* Progress bar - subtle */
+        .progress {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background: var(--kitsune);
+            transition: width 0.6s ease;
+            z-index: 100;
+            opacity: 0.6;
+        }
+
+        /* Navigation hint */
+        .nav-hint {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            font-size: 0.75rem;
+            color: var(--nezumi);
+            opacity: 0.4;
+            letter-spacing: 0.1em;
+        }
+
+        /* Slide counter - Japanese style */
+        .slide-counter {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            font-size: 0.85rem;
+            color: var(--kitsune);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+        }
+
+        /* Ken Burns - slower, more meditative */
+        .ken-burns {
+            animation: kenBurnsSlow 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes kenBurnsSlow {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.08);
+            }
+        }
+
+        /* Film grain overlay for images */
+        .slide-fullimage::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* Vignette effect */
+        .vignette::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(13, 27, 42, 0.7) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Title slide specific */
+        .title-slide {
+            background: linear-gradient(165deg, var(--kon) 0%, #0a141f 50%, var(--sumi) 100%);
+        }
+
+        .title-slide .selfie {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--kitsune);
+            margin-bottom: 40px;
+            filter: grayscale(30%) sepia(20%);
+        }
+
+        .venue-badge {
+            display: inline-block;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            padding: 12px 28px;
+            font-size: 0.8rem;
+            margin-top: 30px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--nezumi);
+        }
+
+        /* Quote marks - Japanese style */
+        .quote-mark {
+            font-size: 4rem;
+            color: var(--kitsune);
+            opacity: 0.3;
+            font-family: 'Noto Serif JP', serif;
+            line-height: 1;
+        }
+
+        /* Floating particles - incense smoke effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--kitsune);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp 15s infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .slide {
+                padding: 40px;
+            }
+
+            .slide-split {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .vertical-text {
+                display: none;
+            }
+
+            .nav-hint {
+                display: none;
+            }
+
+            .slide-fullimage .overlay,
+            .slide-fullimage .overlay-top {
+                padding: 40px;
+            }
+        }
+
+        /* Special ceremonial slide */
+        .ceremonial-bg {
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(197, 61, 67, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(212, 165, 116, 0.1) 0%, transparent 50%),
+                linear-gradient(165deg, var(--kon) 0%, var(--sumi) 100%);
+        }
+
+        /* Ink reveal for dramatic moments */
+        .slide.active .ink-reveal {
+            animation: inkReveal 1.5s ease-out forwards;
+        }
+
+        /* Floating kanji background */
+        .kanji-bg {
+            position: absolute;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 15rem;
+            color: var(--kitsune);
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .kanji-bg.left { left: 5%; top: 50%; transform: translateY(-50%); }
+        .kanji-bg.right { right: 5%; top: 50%; transform: translateY(-50%); }
+
+        /* Mon (crest) decoration */
+        .mon {
+            width: 80px;
+            height: 80px;
+            border: 1px solid var(--kitsune);
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0.1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mon::before {
+            content: '◉';
+            font-size: 2rem;
+            color: var(--kitsune);
+        }
+
+
+        /* Japanese quote styling */
+        .quote-japanese {
+            position: relative;
+            padding: 40px;
+        }
+
+        .quote-japanese::before {
+            content: '「';
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 4rem;
+            color: var(--kitsune);
+            opacity: 0.2;
+        }
+
+        .quote-japanese::after {
+            content: '」';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 4rem;
+            color: var(--kitsune);
+            opacity: 0.2;
+        }
+
+        /* Dramatic text entrance */
+        .text-dramatic {
+            position: relative;
+            display: inline-block;
+        }
+
+        .text-dramatic::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--shu);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s ease;
+        }
+
+        .slide.active .text-dramatic::after {
+            transform: scaleX(1);
+            transition-delay: 1s;
+        }
+
+        /* Image frame styling */
+        .image-frame {
+            position: relative;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), transparent);
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            pointer-events: none;
+        }
+
+        /* Stamp/seal effect */
+        .stamp {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--shu);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            color: var(--shu);
+            transform: rotate(-15deg);
+            opacity: 0.7;
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+        }
+
+        /* Gradient text for titles */
+        .gradient-text {
+            background: linear-gradient(180deg, var(--kinari) 0%, var(--kitsune) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding-bottom: 0.15em;
+            line-height: 1.3;
+        }
+
+        /* Pulsing highlight */
+        @keyframes highlightPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pulse-highlight {
+            animation: highlightPulse 2s ease-in-out infinite;
+        }
+
+        /* Presentation mode enhancements */
+        .cursor-hidden {
+            cursor: none !important;
+        }
+
+        .cursor-hidden * {
+            cursor: none !important;
+        }
+
+        /* Fullscreen adjustments */
+        :fullscreen {
+            background: var(--kon);
+        }
+
+        :fullscreen .nav-hint {
+            display: none;
+        }
+
+        :fullscreen .slide-counter {
+            opacity: 0.3;
+        }
+
+        /* Smooth image loading */
+        .slide-fullimage img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slide-fullimage img.loaded {
+            opacity: 1;
+        }
+
+        /* Focus state removal for cleaner presenting */
+        *:focus {
+            outline: none;
+        }
+
+        /* Print styles for handouts */
+        @media print {
+            .particles, .corner-accent, .progress, .nav-hint, .slide-counter {
+                display: none !important;
+            }
+            .slide {
+                page-break-after: always;
+                position: relative !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles - incense/dust motes -->
+    <div class="particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 35%; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 65%; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 10s;"></div>
+    </div>
+
+
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <section class="slide title-slide active" data-slide="1">
+            <div class="seigaiha-bg"></div>
+            <span class="kanji-bg left" style="opacity: 0.015;">力</span>
+            <span class="kanji-bg right" style="opacity: 0.015;">士</span>
+            <div class="slide-content">
+                <p class="japanese-large animate-in" style="animation: brushStroke 1.2s ease forwards, glowPulse 4s ease-in-out 1.2s infinite;">明生龍</p>
+                <div class="divider animate-in-delay"></div>
+                <h1 class="animate-in-delay gradient-text">The Retirement<br>of Myogiryu</h1>
+                <p class="subtitle animate-in-delay-2">A Sumo Story from Japan</p>
+            </div>
+            <div class="vertical-text">断髪式</div>
+        </section>
+
+        <!-- Slide 2: The Hook Quote -->
+        <section class="slide ceremonial-bg" data-slide="2">
+            <div class="seigaiha-bg"></div>
+            <div class="slide-content quote-japanese">
+                <p class="quote animate-in ink-reveal" style="max-width: 900px; margin: 0 auto;">Part wedding, part funeral,<br>and a cultural celebration<br>only a rare few get to see.</p>
+                <div class="divider-glow animate-in-delay-2"></div>
+                <p class="subtitle animate-in-delay-2" style="margin-top: 20px;">How someone described danpatsu-shiki to me</p>
+            </div>
+        </section>
+
+        <!-- Slide 3: The Setup -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <p class="statement animate-in">I travelled 15 hours<br>to watch a man<br><span class="highlight">get a haircut.</span></p>
+                <div class="divider-vertical animate-in-delay"></div>
+                <p class="subtitle animate-in-delay-2">Let me explain.</p>
+            </div>
+        </section>
+
+        <!-- Slide 4: Who is Myogiryu -->
+        <section class="slide" data-slide="4">
+            <div class="slide-split">
+                <div class="text-left">
+                    <p class="japanese-large animate-in" style="font-size: 2rem; margin-bottom: 10px;">妙義龍</p>
+                    <h2 class="animate-in">Myogiryu Yasunari</h2>
+                    <div class="divider animate-in" style="margin: 30px 0; margin-left: 0;"></div>
+                    <p class="statement-small animate-in-delay" style="line-height: 2.4;">
+                        <span class="gold">Sekiwake</span> &mdash; third highest rank<br>
+                        <span class="gold">601</span> wins &middot; <span class="gold">15</span> years &middot; <span class="gold">6</span> gold stars<br><br>
+                        <em style="color: var(--nezumi);">Now <span class="gold">Furiwake</span>, a sumo elder.</em>
+                    </p>
+                </div>
+                <div class="image-container image-frame animate-in-delay-2">
+                    <img src="assets/images/IMG_6617.jpg" alt="Myogiryu at his retirement ceremony">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: The Venue -->
+        <section class="slide slide-fullimage vignette" data-slide="5">
+            <img src="assets/images/IMG_6734.jpg" alt="Ryogoku Kokugikan" class="ken-burns">
+            <div class="overlay">
+                <p class="japanese animate-in" style="font-size: 1.2rem; letter-spacing: 0.3em; margin-bottom: 15px; opacity: 0.7;">両国国技館</p>
+                <h2 class="animate-in-delay">Ryogoku Kokugikan</h2>
+                <p class="subtitle animate-in-delay-2">The spiritual home of sumo. Tokyo.</p>
+            </div>
+        </section>
+
+        <!-- Slide 6: The Queue -->
+        <section class="slide slide-fullimage vignette" data-slide="6">
+            <img src="assets/images/IMG_6610.jpg" alt="The queue" class="ken-burns">
+            <div class="overlay">
+                <p class="statement-small animate-in">October in Tokyo.<br>A hot day. A long queue.<br><span class="gold">Anticipation in the air.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 7: Inside -->
+        <section class="slide slide-fullimage vignette" data-slide="7">
+            <img src="assets/images/IMG_6620.jpg" alt="Inside the venue" class="ken-burns">
+            <div class="overlay-top">
+                <p class="statement-small animate-in">Inside: every top sumo star.<br>Signing autographs. Shaking hands.<br><span class="gold">Royalty among the people.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 8: Fan Messages -->
+        <section class="slide slide-fullimage vignette" data-slide="8">
+            <img src="assets/images/IMG_6629.jpg" alt="Wall of fan messages" class="ken-burns">
+            <div class="overlay">
+                <p class="statement-small animate-in"><span class="gold">Hundreds of messages.</span> Each one a thank you.</p>
+            </div>
+        </section>
+
+        <!-- Slide 9: The Arena -->
+        <section class="slide slide-fullimage vignette" data-slide="9">
+            <img src="assets/images/IMG_6640.jpg" alt="The arena" class="ken-burns">
+            <div class="overlay">
+                <p class="japanese animate-in" style="font-size: 1.5rem; letter-spacing: 0.3em; margin-bottom: 15px; opacity: 0.7;">土俵</p>
+                <h2 class="animate-in-delay">The Dohyo</h2>
+                <p class="subtitle animate-in-delay-2">Sacred ground. Where careers are made and ended.</p>
+            </div>
+        </section>
+
+        <!-- Slide 10: Then the drums -->
+        <section class="slide ceremonial-bg" data-slide="10">
+            <div class="seigaiha-bg"></div>
+            <span class="kanji-bg left" style="opacity: 0.025;">太</span>
+            <span class="kanji-bg right" style="opacity: 0.025;">鼓</span>
+            <div class="slide-content">
+                <div class="enso animate-in"></div>
+                <p class="statement animate-in-delay ink-reveal"><span class="gradient-text">Then the drums started.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 11: The Ritual Structure -->
+        <section class="slide" data-slide="11">
+            <div class="slide-split">
+                <div class="text-left">
+                    <p class="japanese animate-in" style="font-size: 1rem; letter-spacing: 0.2em; margin-bottom: 10px; opacity: 0.6;">儀式</p>
+                    <h2 class="animate-in">The Ceremony</h2>
+                    <p class="subtitle animate-in" style="margin-bottom: 40px;">A full day of ritual</p>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-text">Taiko drums to open</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-text">Second division matches</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-text">Traditional folk songs</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-text">The final match</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-text">The cutting ceremony</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-text">Top division matches</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-container animate-in-delay">
+                    <img src="assets/images/IMG_6697.jpg" alt="Wrestlers in circle">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: The Matches -->
+        <section class="slide slide-fullimage vignette" data-slide="12">
+            <img src="assets/images/IMG_6648.jpg" alt="Sumo match" class="ken-burns">
+            <div class="overlay">
+                <p class="statement-small animate-in">Real matches. Real competition.<br><span class="gold">The sacred traditions honored.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 13: The Final Match Setup -->
+        <section class="slide ceremonial-bg" data-slide="13">
+            <div class="slide-content">
+                <p class="statement animate-in">His final match<br>as a sumo wrestler.</p>
+                <div class="divider-vertical animate-in-delay"></div>
+                <p class="statement animate-in-delay-2" style="color: var(--nezumi);">His opponents?</p>
+            </div>
+        </section>
+
+        <!-- Slide 14: His Children -->
+        <section class="slide slide-fullimage vignette" data-slide="14">
+            <img src="assets/images/557536227_24692325707086127_5901627587015776422_n.jpg" alt="Final match with children" class="ken-burns">
+            <div class="overlay-center">
+                <div class="slide-content">
+                    <p class="japanese-large animate-in" style="font-size: 1.5rem; margin-bottom: 20px;">子供たち</p>
+                    <p class="statement animate-in-delay ink-reveal"><span class="highlight pulse-highlight" style="font-size: 4rem;">His children.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: The Moment -->
+        <section class="slide ceremonial-bg" data-slide="15">
+            <div class="slide-content">
+                <p class="statement animate-in">They pushed him. He fell.</p>
+                <div class="divider animate-in-delay"></div>
+                <p class="statement-small animate-in-delay-2"><span class="gold">The crowd laughed and cried at the same time.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 16: The Topknot -->
+        <section class="slide" data-slide="16">
+            <span class="kanji-bg left" style="opacity: 0.015;">髪</span>
+            <div class="slide-split">
+                <div class="text-left">
+                    <p class="japanese animate-in" style="font-size: 1.5rem; letter-spacing: 0.2em; margin-bottom: 15px; opacity: 0.7;">大銀杏</p>
+                    <h2 class="animate-in gradient-text">The Topknot</h2>
+                    <div class="divider animate-in" style="margin: 30px 0; margin-left: 0;"></div>
+                    <p class="statement-small animate-in-delay">
+                        In sumo, the topknot isn't just a hairstyle.<br>
+                        <span class="highlight text-dramatic">It's identity.</span><br><br>
+                        <span class="gold">Years to grow. One day to cut.</span>
+                    </p>
+                </div>
+                <div class="image-container image-frame animate-in-delay-2">
+                    <img src="assets/images/IMG_6682.jpg" alt="Hair cutting begins">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 17: The Cutting -->
+        <section class="slide ceremonial-bg" data-slide="17">
+            <div class="seigaiha-bg"></div>
+            <div class="slide-content">
+                <p class="japanese-large animate-in gold-glow" style="font-size: 1.5rem; margin-bottom: 30px;">二時間半</p>
+                <h2 class="animate-in-delay gradient-text" style="font-size: 3rem;">Two hours and thirty minutes.</h2>
+                <div class="divider-glow animate-in-delay"></div>
+                <p class="statement-small animate-in-delay-2"><span class="gold">One snip at a time.</span><br>Everyone who shaped his career.</p>
+            </div>
+        </section>
+
+        <!-- Slide 18: The Procession -->
+        <section class="slide slide-fullimage vignette" data-slide="18">
+            <img src="assets/images/IMG_6688.jpg" alt="Hair cutting ceremony" class="ken-burns">
+            <div class="overlay">
+                <p class="statement-small animate-in">Coaches. Rivals. Sponsors. Friends.<br><span class="gold">Each one walked up, took the scissors, and cut.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 19: More procession -->
+        <section class="slide slide-fullimage vignette" data-slide="19">
+            <img src="assets/images/IMG_6691.jpg" alt="Traditional dress" class="ken-burns">
+            <div class="overlay">
+                <p class="statement-small animate-in"><span class="gold">Each cut was small.<br>But each cut meant something.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 20: Rituals Matter -->
+        <section class="slide ceremonial-bg" data-slide="20">
+            <div class="seigaiha-bg"></div>
+            <span class="kanji-bg left" style="opacity: 0.02;">儀</span>
+            <span class="kanji-bg right" style="opacity: 0.02;">式</span>
+            <div class="slide-content">
+                <div class="enso animate-in" style="border-color: var(--shu); width: 150px; height: 150px;"></div>
+                <p class="japanese animate-in-delay" style="font-size: 1.2rem; letter-spacing: 0.3em; margin-bottom: 20px; opacity: 0.7;">儀式は大切</p>
+                <p class="statement animate-in-delay-2 text-dramatic"><span class="highlight pulse-highlight">Rituals matter.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 21: The Reflection -->
+        <section class="slide ceremonial-bg" data-slide="21">
+            <div class="seigaiha-bg"></div>
+            <div class="slide-content">
+                <p class="statement-small animate-in" style="max-width: 800px; margin: 0 auto; line-height: 2;">
+                    This man gave fifteen years to sumo.<br>
+                    Sumo gave him two and a half hours to say goodbye.<br><br>
+                    That's not inefficient.<br>
+                    <span class="highlight text-dramatic pulse-highlight">That's respect.</span>
+                </p>
+            </div>
+            <div class="vertical-text" style="animation: glowPulse 4s ease-in-out infinite;">敬意</div>
+        </section>
+
+        <!-- Slide 22: The Aftermath -->
+        <section class="slide slide-fullimage vignette" data-slide="22">
+            <img src="assets/images/IMG_6729.jpg" alt="Arena emptying" class="ken-burns">
+            <div class="overlay-center">
+                <div class="slide-content">
+                    <p class="statement-small animate-in">And then it was over.<br><span class="gold">A career closed properly.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 23: Ichigo Ichie -->
+        <section class="slide ceremonial-bg" data-slide="23">
+            <div class="seigaiha-bg"></div>
+            <span class="kanji-bg left" style="opacity: 0.025; font-size: 12rem;">一</span>
+            <span class="kanji-bg right" style="opacity: 0.025; font-size: 12rem;">会</span>
+            <div class="slide-content">
+                <p class="japanese-large animate-in ink-reveal" style="font-size: 3.5rem; margin-bottom: 30px;">一期一会</p>
+                <h2 class="animate-in-delay gradient-text">Ichigo Ichie</h2>
+                <div class="divider-glow animate-in-delay"></div>
+                <p class="statement-small animate-in-delay-2"><span class="gold">One time. One meeting.</span><br>This moment will never happen again.</p>
+            </div>
+        </section>
+
+        <!-- Slide 24: We Rush Endings -->
+        <section class="slide" data-slide="24">
+            <div class="slide-content">
+                <p class="statement-small animate-in" style="max-width: 800px; margin: 0 auto; line-height: 2.2;">
+                    We rush endings.<br><br>
+                    <span class="gold">How we close a chapter<br>shapes how we remember it.</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Slide 25: Call to Action -->
+        <section class="slide ceremonial-bg" data-slide="25">
+            <div class="seigaiha-bg"></div>
+            <div class="slide-content">
+                <p class="statement-small animate-in" style="max-width: 850px; margin: 0 auto; line-height: 2.2;">
+                    Cherish this time together.<br><br>
+                    <span class="gold">Look for rituals in everyday life.</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Slide 26: Thank You -->
+        <section class="slide title-slide" data-slide="26">
+            <div class="seigaiha-bg"></div>
+            <div class="slide-content">
+                <p class="japanese-large animate-in gold-glow" style="font-size: 1.8rem; margin-bottom: 30px;">ありがとうございました</p>
+                <h1 class="animate-in-delay gradient-text">Thank you.</h1>
+                <div class="divider-glow animate-in-delay"></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="progress" id="progress"></div>
+    <div class="slide-counter"><span id="current">1</span> / <span id="total">26</span></div>
+    <div class="nav-hint">← → navigate · F fullscreen</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        const currentDisplay = document.getElementById('current');
+        const totalDisplay = document.getElementById('total');
+        let currentSlide = 0;
+
+        totalDisplay.textContent = slides.length;
+
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+
+            const progressWidth = ((index + 1) / slides.length) * 100;
+            progress.style.width = progressWidth + '%';
+
+            currentDisplay.textContent = index + 1;
+
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowRight':
+                case 'ArrowDown':
+                case ' ':
+                case 'Enter':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    e.preventDefault();
+                    prevSlide();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    showSlide(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    showSlide(slides.length - 1);
+                    break;
+            }
+        });
+
+        // Touch navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Click navigation
+        document.addEventListener('click', (e) => {
+            const clickX = e.clientX;
+            const windowWidth = window.innerWidth;
+
+            if (clickX > windowWidth * 0.5) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+
+        // Preload all images for smooth transitions
+        const images = document.querySelectorAll('.slide-fullimage img');
+        images.forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                img.addEventListener('load', () => img.classList.add('loaded'));
+            }
+        });
+
+        // Fullscreen support (press F)
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log('Fullscreen not supported');
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Auto-hide cursor after 3 seconds of inactivity
+        let cursorTimeout;
+        function hideCursor() {
+            document.body.classList.add('cursor-hidden');
+        }
+        function showCursor() {
+            document.body.classList.remove('cursor-hidden');
+            clearTimeout(cursorTimeout);
+            cursorTimeout = setTimeout(hideCursor, 3000);
+        }
+        document.addEventListener('mousemove', showCursor);
+        document.addEventListener('mousedown', showCursor);
+
+        // Extended keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            switch(e.key.toLowerCase()) {
+                case 'f':
+                    e.preventDefault();
+                    toggleFullscreen();
+                    break;
+                case 'escape':
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    }
+                    break;
+                case 'r':
+                    // Reset to first slide
+                    e.preventDefault();
+                    showSlide(0);
+                    break;
+            }
+        });
+
+        // Prevent context menu during presentation
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Start cursor hide timer
+        cursorTimeout = setTimeout(hideCursor, 3000);
+    </script>
+</body>
+</html>
